@@ -51,7 +51,7 @@ def predict(checkpoint_path_list,df_test,x):
         smiles_columns = ['solute_smiles_canonical', 'solvent_smiles_canonical'] # name of the column containing SMILES strings
         smiss = df_test[smiles_columns].values
         n_componenets = len(smiles_columns)
-        X_d = np.concatenate([x,df_test[['temperature']].to_numpy()],axis=1)
+        X_d = np.concatenate([x,df_test[['Temperature [K]']].to_numpy()],axis=1)
         test_datapointss = [[data.MoleculeDatapoint.from_smi(smi, x_d=X_d) for smi,X_d in zip(smiss[:, i],X_d)] for i in range(n_componenets)]
         featurizer = featurizers.SimpleMoleculeMolGraphFeaturizer()
         test_dsets = [data.MoleculeDataset(test_datapoints, featurizer) for test_datapoints in test_datapointss]
@@ -78,7 +78,7 @@ def predict(checkpoint_path_list,df_test,x):
 # It uses a default threshold of 0.99 as
 # maximum allowable mole fraction
 # it returns molar fraction x
-def calc_x(x0,df,thresh=0.99):
+def calc_x(x0,df,checkpoint_path_list,thresh=0.99):
     R = 1.98720425864083/1000 # Kcal K-1 mol-1
     df = predict(checkpoint_path_list,df,pd.DataFrame(x0).to_numpy()) # predict gamma at x0
     x = np.exp(df['dHfus_pred']/(R) * ((1/df['MP_pred']) - (1/df['Temperature [K]'])) - (df['gamma']) ) 
@@ -97,24 +97,24 @@ def calculate_solubility(df,N_iteration):
     # Predict dHfus
     checkpoint_path_list = []
     for i in range(5):
-        checkpoint_path_list.append('/trained_models/dHfus/model_'+str(i)+'.pt')
-    preds = predict_single([checkpoint_path_0,checkpoint_path_1,checkpoint_path_2,checkpoint_path_3,checkpoint_path_4],df)
+        checkpoint_path_list.append('trained_models/dHfus/model_'+str(i)+'.pt')
+    preds = predict_single(checkpoint_path_list,df)
     df['dHfus_pred'] = np.array(preds)[:,:,0].T.mean(axis=1)
     df['dHfus_std'] = np.array(preds)[:,:,0].T.std(axis=1)
     # Predict MP
     checkpoint_path_list = []
     for i in range(5):
-        checkpoint_path_list.append('/trained_models/MP/model_'+str(i)+'.pt')
-    preds = predict_single([checkpoint_path_0,checkpoint_path_1,checkpoint_path_2,checkpoint_path_3,checkpoint_path_4],df)
+        checkpoint_path_list.append('trained_models/MP/model_'+str(i)+'.pt')
+    preds = predict_single(checkpoint_path_list,df)
     df['MP_pred'] = np.array(preds)[:,:,0].T.mean(axis=1)
     df['MP_std'] = np.array(preds)[:,:,0].T.std(axis=1)
     # Calculate solubility
     checkpoint_path_list = []
     for i in range(5):
-        checkpoint_path_list.append('/trained_models/gamma/model_'+str(i)+'.pt')
+        checkpoint_path_list.append('trained_models/gamma/model_'+str(i)+'.pt')
     x = df[['dHfus_std']] * 0 # initialize at infinite dilution
     for i in range(N_iteration): # Iterate to adjust for x
-        x = calc_x(x,df)
+        x = calc_x(x,df,checkpoint_path_list)
         S = x * df['solvent_density']
         logS = np.log10(S)
         
