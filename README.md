@@ -16,6 +16,9 @@ $$x^\alpha_B \gamma^\alpha_B = x^\beta_B \gamma^\beta_B$$
 
 where $x$ is the molar fraction, $\gamma$ is the activity coefficient, $B$ is the solute, $\alpha$ is the solvent-rich phase, and $\beta$ is the solute-rich phase (the derivation of this equation is shown in the supporting information). We use an initial guess of $x^\alpha_B=0$ and $x^\beta_B=1$ to calculate $x^\alpha_B$, and then update the prediction of $\gamma^\alpha_B$ to calculate $x^\beta_B$.
 
+<div align="center">
+  <img width="729" height="493" alt="process" src="https://github.com/user-attachments/assets/6b39af2e-a88e-492e-8451-516dee2859d2" />
+</div>
 
 ### 1. Requirements
 
