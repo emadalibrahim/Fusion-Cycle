@@ -39,9 +39,9 @@ Solubility calculation expects the following columns:
 * **Solute/Solvent**
   columns names: `solute_smiles_canonical` and `solvent_smiles_canonical`.
 * **Temperature**
-  A numeric column (e.g. `298.15`) in [Kelvins].
-* **solvent_density**
-  A numeric column (e.g. `17.25`) in [mol/L].
+  columns name: `Temperature [K]`. A numeric column (e.g. `298.15`) in [Kelvins].
+* **Density**
+  columns name: `solvent_density`. A numeric column (e.g. `17.25`) in [mol/L].
 
 ---
 
