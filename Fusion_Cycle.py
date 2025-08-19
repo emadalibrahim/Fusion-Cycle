@@ -156,7 +156,7 @@ class model:
                 checkpoint_path_list.append('trained_models/model_gamma_mix_FT_'+str(i)+'.pt')
             else:
             # checkpoint_path_list.append('trained_models/gamma/model_'+str(i)+'.pt')
-                checkpoint_path_list.append('trained_models/model_final_DB_'+str(i)+'.pt')
+                checkpoint_path_list.append('trained_models/model_final_'+str(i)+'.pt')
         x = df[['dHfus_std']] * 0 # initialize at infinite dilution
         for i in range(self.N_iteration): # Iterate to adjust for x
             x,gamma = self.calc_x_solid(x,df,checkpoint_path_list)
@@ -198,7 +198,7 @@ class model:
                 checkpoint_path_list.append('trained_models/model_gamma_mix_FT_'+str(i)+'.pt')
             else:
             # checkpoint_path_list.append('trained_models/gamma/model_'+str(i)+'.pt')
-                checkpoint_path_list.append('trained_models/model_final_DB_'+str(i)+'.pt')
+                checkpoint_path_list.append('trained_models/model_final_'+str(i)+'.pt')
         x1 = df[['MP_std']] * 0.0 # initialize solvent-rich phase
         x2 = x1 + 1.0 # initialize solute-rich phase
         for i in range(self.N_iteration): # Iterate to adjust for x
