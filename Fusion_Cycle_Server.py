@@ -45,10 +45,10 @@ def fusion_cycle_service(request_json: RequestBody):
 
     try:
         results = []
-        for solute, solvent, T, rho in zip(request_json.solute_smiles, 
-                                           request_json.solute_smiles, 
-                                           request_json.solute_smiles, 
-                                           request_json.solute_smiles):
+        for solute, solvent, T, rho in zip(request_json.solute_smiles,
+                                   request_json.solvent_smiles,
+                                   request_json.temperature,
+                                   request_json.density):
             dp = pd.DataFrame({'solute_smiles_canonical':[solute],
                                'solvent_smiles_canonical':[solvent],
                                'Temperature [K]':[T],

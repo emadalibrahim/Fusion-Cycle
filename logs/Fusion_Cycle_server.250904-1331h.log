@@ -1,0 +1,2 @@
+Dropping last batch of size 1 to avoid issues with batch normalization (dataset size = 1, batch_size = 64)
+Dropping last batch of size 1 to avoid issues with batch normalization (dataset size = 1, batch_size = 64)

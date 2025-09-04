@@ -11,10 +11,10 @@ def test_call():
         "solvent_smiles": [
             "CO"
         ],
-        "Temperature [K]": [
+        "temperature": [
             298.15
         ],
-        "solvent_density": [
+        "density": [
             12.5
         ]
     }
