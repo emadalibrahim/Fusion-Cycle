@@ -5,14 +5,14 @@ from wrappers.base import BaseResponse, BaseWrapper
 
 
 class FCInput(LowerCamelAliasModel):
-    solvent_smiles: str = Field(
-        description="Solvent SMILES for FC calculation. "
+    solute_smiles: str = Field(
+        description="Solute SMILES for FC calculation. "
                     "Can be multi-molecule (separated by .), in which case "
                     "the max FC among the molecules will be returned",
         example="c1ccccc1"
     )
-    solute_smiles: str = Field(
-        description="Solute SMILES for FC calculation. "
+    solvent_smiles: str = Field(
+        description="Solvent SMILES for FC calculation. "
                     "Can be multi-molecule (separated by .), in which case "
                     "the max FC among the molecules will be returned",
         example="CO"
