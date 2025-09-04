@@ -1,0 +1,42 @@
+FROM mambaorg/micromamba:1.4.7
+
+USER root
+# Keep the base environment activated
+ARG MAMBA_DOCKERFILE_ACTIVATE=1
+RUN apt update && apt -y install git gcc g++ make
+
+# Use micromamba to resolve conda-forge, much faster than conda
+RUN micromamba install -y python=3.11 -c conda-forge
+RUN pip install \
+    fastapi==0.116.1 \
+    chemprop==2.2.0 \
+    pytorch-lightning==2.5.2 \
+    torch==2.7.1 \
+    astartes==1.3.1 \
+    aimsim==2.2.2 \
+    configargparse==1.7.1 \
+    numpy==2.3.1 \
+    pandas==2.3.1 \
+    rdkit==2025.3.3 \
+    rich==14.0.0 \
+    descriptastorus==2.8.0 \
+    pillow==11.3.0 \
+    # protobuf==3.19.0 \
+    pydantic==2.11.7 \
+    # rdchiral==1.1.0 \
+    requests==2.32.5 \
+    scikit-learn==1.7.0 \
+    scipy==1.16.0 \
+    # tensorflow-cpu==2.7.4 \
+    urllib3==2.5.0 \
+    uvicorn==0.35.0
+    # zipp==3.20.2
+
+COPY . /app/Fusion_Cycle
+WORKDIR /app/Fusion_Cycle
+
+EXPOSE 9601
+
+ENV CUDA_VISIBLE_DEVICES 10
+
+CMD ["python", "Fusion_Cycle_Server.py"]

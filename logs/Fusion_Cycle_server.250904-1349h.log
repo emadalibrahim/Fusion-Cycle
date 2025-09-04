@@ -1,0 +1,7 @@
+Fusion_Cycle model loaded: <class 'Fusion_Cycle.model'>
+Received request: {'solute_smiles': ['Cc1ccccc1', 'Cc1ccccc1'], 'solvent_smiles': ['CO', 'CO'], 'temperature': [298.15, 298.15], 'density': [12.5, 12.5]}
+Input dataframe:
+  solute_smiles_canonical solvent_smiles_canonical  Temperature [K]  solvent_density
+0               Cc1ccccc1                       CO           298.15             12.5
+Dropping last batch of size 1 to avoid issues with batch normalization (dataset size = 1, batch_size = 64)
+Fusion_Cycle model loaded: <class 'Fusion_Cycle.model'>

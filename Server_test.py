@@ -6,16 +6,16 @@ def test_call():
     url = "http://0.0.0.0:9601/Fusion_Cycle"
     data = {
         "solute_smiles": [
-            "Cc1ccccc1"
+            "Cc1ccccc1","Cc1ccccc1"
         ],
         "solvent_smiles": [
-            "CO"
+            "CO", "CO"
         ],
         "temperature": [
-            298.15
+            298.15,298.15
         ],
         "density": [
-            12.5
+            12.5,12.5
         ]
     }
     resp = requests.post(url, json=data)

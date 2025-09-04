@@ -33,7 +33,7 @@ class model:
             test_data = [data.MoleculeDatapoint.from_smi(smi) for smi in smis]
             featurizer = featurizers.SimpleMoleculeMolGraphFeaturizer()
             test_dset = data.MoleculeDataset(test_data, featurizer=featurizer)
-            test_loader = data.build_dataloader(test_dset, shuffle=False)
+            test_loader = data.build_dataloader(test_dset, shuffle=False,batch_size=1)
             with torch.inference_mode():
                 trainer = pl.Trainer(
                     logger=None,
@@ -105,7 +105,7 @@ class model:
                 featurizer = featurizers.SimpleMoleculeMolGraphFeaturizer()
                 test_dsets = [data.MoleculeDataset(test_datapoints, featurizer) for test_datapoints in test_datapointss]
                 test_mcdset = data.MulticomponentDataset(test_dsets)
-                test_loader = data.build_dataloader(test_mcdset, shuffle=False)
+                test_loader = data.build_dataloader(test_mcdset, shuffle=False,batch_size=1)
                 with torch.inference_mode():
                     trainer = pl.Trainer(
                         logger=None,
