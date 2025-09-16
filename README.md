@@ -22,15 +22,12 @@ where $x$ is the molar fraction, $\gamma$ is the activity coefficient, $B$ is th
 
 ### 1. Requirements
 
-* Python 3.8+
-* RDKit
-* pandas, numpy
 * chemprop (the official [Chemprop](https://github.com/chemprop/chemprop) package)
 
 Install via:
 
 ```bash
-pip install rdkit-pypi pandas numpy chemprop
+pip install chemprop
 ```
 
 ---
@@ -46,8 +43,16 @@ Solubility calculation expects the following columns:
 * **Density**
   columns name: `solvent_density`. A numeric column (e.g. `17.25`) in [mol/L].
 
+Note that a two-parameter QSPR will be used to predict the solvent density (approximated at 298K) if left empty.
+
 ---
 
 ### 3. Example
 
-An example run is shown in Example_run.ipynb
+First, clone this repository and enter the directory:
+
+```bash
+git clone https://github.com/emadalibrahim/Fusion-Cycle.git
+cd Fusion-Cycle
+```
+An example run is shown in `Example_run.ipynb`
