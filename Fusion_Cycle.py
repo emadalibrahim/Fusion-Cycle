@@ -9,6 +9,20 @@ from chemprop.models import multi
 # from mixtures import ComponentDatapoint, MixtureDataset, MixtureMPNN, collate_mixture
 from torch.utils.data import DataLoader
 
+
+# Detect number of available CUDA devices
+num_devices = torch.cuda.device_count()
+
+if num_devices > 0:
+    # If GPUs exist, pick device 0 by default
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    print(f"Using GPU device 0 (total available: {num_devices})")
+else:
+    # No GPUs → run on CPU
+    os.environ["CUDA_VISIBLE_DEVICES"] = ""
+    print("No GPU detected, running on CPU")
+
+
 class model:
     def __init__(self, N_iteration=10, thresh=0.99, Num_ensembles = 5, mixture = False):
         self.N_iteration = N_iteration
