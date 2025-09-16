@@ -8,7 +8,7 @@ from chemprop import data, featurizers,models
 from chemprop.models import multi
 # from mixtures import ComponentDatapoint, MixtureDataset, MixtureMPNN, collate_mixture
 from torch.utils.data import DataLoader
-
+from Density.QSPR import fill_solvent_density
 
 # Detect number of available CUDA devices
 num_devices = torch.cuda.device_count()
@@ -222,6 +222,8 @@ class model:
         return logS,gamma1
 
     def calculate_solubility(self,df):
+        # Use QSPR to fill in missing solvent densities (approximated at 298K)
+        df = fill_solvent_density(df)
         # Predict MP
         checkpoint_path_list = []
         for i in range(self.Num_ensembles):
