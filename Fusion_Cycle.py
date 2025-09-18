@@ -14,12 +14,12 @@ from Density.QSPR import fill_solvent_density
 num_devices = torch.cuda.device_count()
 
 if num_devices > 0:
-    # If GPUs exist, pick device 0 by default
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    device = torch.device("cuda")
     print(f"Using GPU device 0 (total available: {num_devices})")
 else:
-    # No GPUs → run on CPU
     os.environ["CUDA_VISIBLE_DEVICES"] = ""
+    device = torch.device("cpu")
     print("No GPU detected, running on CPU")
 
 
@@ -39,9 +39,9 @@ class model:
         pred_list = []
         for checkpoint_path in checkpoint_path_list:
             if '.ckpt' in str(checkpoint_path):
-                mpnn = models.MPNN.load_from_checkpoint(checkpoint_path)
+                mpnn = models.MPNN.load_from_checkpoint(checkpoint_path,map_location=device)
             else:
-                mpnn = models.MPNN.load_from_file(checkpoint_path)
+                mpnn = models.MPNN.load_from_file(checkpoint_path,map_location=device)
             smiles_columns = 'solute_smiles_canonical' # name of the column containing SMILES strings
             smis = df_test[smiles_columns].values
             test_data = [data.MoleculeDatapoint.from_smi(smi) for smi in smis]
@@ -68,9 +68,9 @@ class model:
             pred_list = []
             for checkpoint_path in checkpoint_path_list:
                 if '.pt' in str(checkpoint_path):
-                    mcmpnn = MixtureMPNN.load_from_file(checkpoint_path)
+                    mcmpnn = MixtureMPNN.load_from_file(checkpoint_path,map_location=device)
                 else:
-                    mcmpnn = MixtureMPNN.load_from_checkpoint(checkpoint_path)
+                    mcmpnn = MixtureMPNN.load_from_checkpoint(checkpoint_path,map_location=device)
                 smiles_columns = ["mol_solute", "mol_solvent1", "mol_solvent2"]  # name of the column containing SMILES strings
                 frac_columns = ["frac_solvent1"]
                 target_columns = ["gamma"]  # list of names of the columns containing targets
@@ -108,9 +108,9 @@ class model:
             pred_list = []
             for checkpoint_path in checkpoint_path_list:
                 if '.pt' in str(checkpoint_path):
-                    mcmpnn = multi.MulticomponentMPNN.load_from_file(checkpoint_path)
+                    mcmpnn = multi.MulticomponentMPNN.load_from_file(checkpoint_path,map_location=device)
                 else:
-                    mcmpnn = multi.MulticomponentMPNN.load_from_checkpoint(checkpoint_path)
+                    mcmpnn = multi.MulticomponentMPNN.load_from_checkpoint(checkpoint_path,map_location=device)
                 smiles_columns = ['solute_smiles_canonical', 'solvent_smiles_canonical'] # name of the column containing SMILES strings
                 smiss = df_test[smiles_columns].values
                 n_componenets = len(smiles_columns)
@@ -248,3 +248,4 @@ class model:
             # df.loc[-idx,['logS_calc','gamma']] = self.calculate_solubility_liquid(df_liquid)
         df.to_csv('Results.csv',index=False)
         return df['logS_calc']
+
