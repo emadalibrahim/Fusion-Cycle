@@ -177,7 +177,10 @@ def fill_solvent_density(df, model_path='qspr_density_model.pkl'):
 
     # Find the indices of rows with missing solvent density
     missing_idx = df['solvent_density'].isna()
-    print(missing_idx)
+
+    if missing_idx.sum()==0:
+        return df
+    
     # Load the trained model
     if not os.path.exists(model_path):
         print(f"Error: Model file not found at '{model_path}'. Cannot fill gaps.")
