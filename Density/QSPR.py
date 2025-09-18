@@ -170,7 +170,7 @@ def fill_solvent_density(df, model_path='qspr_density_model.pkl'):
     model_path = os.path.join(script_dir, model_path)
 
     
-    df = df.rename(columns={'solvent_smiles_canonical':'SMILES'})
+    df['SMILES'] = df['smiles_solvent_canonical']
 
     if 'solvent_density' not in df.columns:
         df['solvent_density'] = np.nan
