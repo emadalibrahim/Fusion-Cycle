@@ -198,7 +198,6 @@ def fill_solvent_density(df, model_path='qspr_density_model.pkl'):
     df_to_predict = df.loc[missing_idx].copy()
             
     df_to_predict = build_features(df_to_predict)
-    print(df_to_predict)
     
     # Get the features for prediction
     X_predict = df_to_predict[['rho_R', 'Eelstat']].values
