@@ -148,10 +148,6 @@ def load_model(filename):
     print(f"Model loaded from '{filename}'.")
     return model
 
-import pandas as pd
-import numpy as np
-import pickle
-import os
 
 def fill_solvent_density(df, model_path='qspr_density_model.pkl'):
     """
@@ -170,7 +166,7 @@ def fill_solvent_density(df, model_path='qspr_density_model.pkl'):
     model_path = os.path.join(script_dir, model_path)
 
     
-    df['SMILES'] = df['smiles_solvent_canonical']
+    df['SMILES'] = df['solvent_smiles_canonical']
 
     if 'solvent_density' not in df.columns:
         df['solvent_density'] = np.nan
