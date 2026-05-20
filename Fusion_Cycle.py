@@ -248,3 +248,4 @@ class model:
             # df.loc[-idx,['logS_calc','gamma']] = self.calculate_solubility_liquid(df_liquid)
         df.to_csv('Results.csv',index=False)
         return df['logS_calc']
+

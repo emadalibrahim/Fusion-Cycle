@@ -148,7 +148,6 @@ def load_model(filename):
     print(f"Model loaded from '{filename}'.")
     return model
 
-
 def fill_solvent_density(df, model_path='qspr_density_model.pkl'):
     """
     Fills gaps in the 'solvent_density' column of a DataFrame using a QSPR model.
@@ -165,7 +164,6 @@ def fill_solvent_density(df, model_path='qspr_density_model.pkl'):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     model_path = os.path.join(script_dir, model_path)
 
-    
     df['SMILES'] = df['solvent_smiles_canonical']
 
     if 'solvent_density' not in df.columns:
