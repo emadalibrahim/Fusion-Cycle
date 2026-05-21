@@ -32,7 +32,52 @@ pip install chemprop
 
 ---
 
-### 2. Data Formatting
+### 2. Installation
+
+#### Local editable install
+
+For development, clone this repository and install it into an existing environment:
+
+```bash
+git clone https://github.com/emadalibrahim/Fusion-Cycle.git
+cd Fusion-Cycle
+python -m pip install -e .
+```
+
+#### Build and install a conda package
+
+The repository includes a conda-build recipe in `conda-recipe/`. Build the package locally with:
+
+```bash
+conda install -c conda-forge conda-build
+conda build conda-recipe -c conda-forge -c pytorch
+```
+
+Then install the locally built package:
+
+```bash
+conda install --use-local fusioncycle -c conda-forge -c pytorch
+```
+
+The conda package includes the trained model files under `trained_models/`, so it is large. After installation, both import styles are supported:
+
+```python
+import Fusion_Cycle
+
+model = Fusion_Cycle.model()
+```
+
+or:
+
+```python
+import fusioncycle
+
+model = fusioncycle.model()
+```
+
+---
+
+### 3. Data Formatting
 
 #### Single-solvent predictions
 
@@ -76,7 +121,7 @@ Mixture model weights are loaded from:
 
 ---
 
-### 3. Example
+### 4. Example
 
 First, clone this repository and enter the directory:
 

@@ -1,0 +1,39 @@
+{% set name = "fusioncycle" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ..
+
+build:
+  number: 0
+  script: bash {{ RECIPE_DIR }}/build.sh
+
+requirements:
+  host:
+    - python >=3.10
+    - pip
+    - setuptools >=68
+    - wheel
+  run:
+    - python >=3.10
+    - chemprop
+    - lightning
+    - numpy
+    - pandas
+    - pytorch
+    - rdkit
+    - scikit-learn
+
+test:
+  imports:
+    - Fusion_Cycle
+    - fusioncycle
+    - Density.QSPR
+
+about:
+  summary: Machine learning tools to estimate solubility with Fusion-Cycle models.
+  license: MIT

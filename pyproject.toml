@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fusioncycle"
+version = "0.1.0"
+description = "Machine learning tools to estimate solubility with Fusion-Cycle models."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "chemprop",
+    "lightning",
+    "numpy",
+    "pandas",
+    "rdkit",
+    "scikit-learn",
+    "torch",
+]
+
+[tool.setuptools]
+py-modules = ["Fusion_Cycle", "Fusion_Cycle_Server", "default"]
+packages = ["Density", "fusioncycle"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+Density = ["*.csv", "*.pkl"]
