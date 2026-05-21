@@ -1,0 +1,7 @@
+batch_norm: false
+final_lr: 0.0001
+init_lr: 0.0001
+max_lr: 0.001
+metrics: null
+mix_mpn: null
+warmup_epochs: 2
