@@ -176,3 +176,15 @@ model = Fusion_Cycle.model(
 )
 logS = model.calculate_solubility(df)
 ```
+
+---
+
+### 5. How to Cite
+
+For single-solvent predictions, please cite:
+
+Al Ibrahim, Emad, et al. "Accurately predicting solubility curves via a thermodynamic cycle, machine learning, and solvent ensembles." Journal of the American Chemical Society 147.49 (2025): 45057-45069.
+
+For mixed-solvent predictions, please cite:
+
+Buzzi, Simona, et al. "Predicting solubility curves in solvent mixtures using thermodynamic cycles and machine learning." Chemrxiv (2026).
